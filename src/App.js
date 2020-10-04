@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import BodyApp from './components/BodyApp';
+import VotesList from './components/VotesList';
+
 import './App.css';
 
-function App() {
+
+const App = () => {
+  const [isStatisticOpened, setIsStatisticOpened] = useState(false);
+  const handleOpenStatistic = () => {
+    setIsStatisticOpened(!isStatisticOpened);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome!</h1>
+      <h2>This is the Vote app. You can choise and vote for your favorite number.</h2>
+      <h6>Please push on button with number you already choice.</h6>
+      {!isStatisticOpened && <BodyApp />}
+      <h6>The same, you can click on button below and watch how many vote was already done for each number.</h6>
+      <button className="ButtonStatistic" onClick={handleOpenStatistic}>{`${isStatisticOpened ? "Close" : "Open"} statistic`}</button>
+      {isStatisticOpened && <VotesList />}
     </div>
   );
 }
